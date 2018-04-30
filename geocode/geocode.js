@@ -12,7 +12,7 @@ var geocodeAddress = (address, callback) => {
 	}, (error, response, body) => {
 		// IF USER CANNOT CONNECT TO GOOGLE API
 		if (error) {
-			callback('Unable to connect to Google servers.')
+			callback('Unable to connect to Google servers.');
 		// IF GOOGLE API CANNOT FIND ADDRESS
 		} else if (body.status === 'ZERO_RESULTS') {
 			callback('Unable to find that address.');
@@ -21,7 +21,8 @@ var geocodeAddress = (address, callback) => {
 			callback(undefined, {
 				address: body.results[0].formatted_address,
 				latitude: body.results[0].geometry.location.lat,
-				longitude: body.results[0].geometry.location.lng
+				longitude: body.results[0].geometry.location.lng,
+				city: body.results[0].address_components[3].long_name
 			});
 		}
 
